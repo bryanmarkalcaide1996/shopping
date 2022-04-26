@@ -1,11 +1,13 @@
 import React from "react";
-import { useProductsContext } from "../context/products_context";
 import { formatPrice } from "../utils/helper.js";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useProductsContext } from "../context/products_context";
+import { useCartContext } from "../context/cart_context.js";
 
 function ProductsList() {
   const { allProducts } = useProductsContext();
+  const { addToCart } = useCartContext();
   return (
     <Wrapper>
       {allProducts.map(
@@ -23,7 +25,13 @@ function ProductsList() {
 
               <button
                 onClick={() => {
-                  console.log(id);
+                  addToCart({
+                    id,
+                    productName,
+                    imageUrl,
+                    description,
+                    unitPrice,
+                  });
                 }}
               >
                 Add to Cart
