@@ -6,18 +6,19 @@ import {
   TOTAL_AMOUNT,
   CLEAR_CART,
 } from "../utils/action_type";
-function getLocalStorage() {
-  let data = localStorage.getItem("myCart");
-  if (data) {
-    return JSON.parse(data);
+
+const getLocaleStorage = () => {
+  let cartData = JSON.parse(localStorage.getItem("cart"));
+  if (cartData) {
+    return cartData;
   } else {
-    localStorage.setItem("myCart", JSON.stringify([]));
+    return [];
   }
-}
+};
 
 const CartContext = createContext();
 const initialState = {
-  cart: getLocalStorage(),
+  cart: getLocaleStorage(),
   totalAmount: 0,
 };
 
@@ -40,8 +41,8 @@ const CartProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(state.cart));
     dispatch({ type: TOTAL_AMOUNT });
-    localStorage.setItem("myCart", JSON.stringify(state.cart));
   }, [state.cart]);
 
   return (
