@@ -1,28 +1,66 @@
-import React, { useContext, createContext, useReducer, useEffect } from "react";
+import React, {
+  useContext,
+  createContext,
+  useReducer,
+  useEffect,
+  useState,
+} from "react";
 import reducer from "../reducer/products_reducer";
 import data from "../json/items.json";
-import { LOAD_AND_FETCH } from "../action_type";
+import {
+  LOAD_AND_FETCH,
+  LOAD_AND_FETCH_SINGLE_PRODUCT,
+  CLEAR_SINGLE_PRODUCT,
+} from "../utils/action_type";
 
 const initialState = {
-  isLoading: true,
   allProducts: [],
-  featuredProducts: [],
+  singleProduct: {},
 };
 
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setIsLoading] = useState(false);
 
+  function loadingState() {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }
+
+  // fetch data from json file
   useEffect(() => {
-    data &&
-      setTimeout(() => {
-        dispatch({ type: LOAD_AND_FETCH, payload: data });
-      }, 1500);
+    dispatch({ type: LOAD_AND_FETCH, payload: data });
   }, []);
 
+  // fetch singleProduct from json file
+  function fetchSingleProduct(id) {
+    const singleProduct = data.filter((product) => product.id === id);
+
+    dispatch({
+      type: LOAD_AND_FETCH_SINGLE_PRODUCT,
+      payload: singleProduct,
+    });
+  }
+
+  // clear value of single product state
+  function clearSingleProduct() {
+    dispatch({ type: CLEAR_SINGLE_PRODUCT });
+  }
+
   return (
-    <ProductsContext.Provider value={{ ...state, data }}>
+    <ProductsContext.Provider
+      value={{
+        ...state,
+        fetchSingleProduct,
+        clearSingleProduct,
+        loadingState,
+        isLoading,
+      }}
+    >
       {children}
     </ProductsContext.Provider>
   );

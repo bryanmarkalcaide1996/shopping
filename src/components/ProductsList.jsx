@@ -1,6 +1,8 @@
 import React from "react";
 import { useProductsContext } from "../context/products_context";
+import { formatPrice } from "../utils/helper.js";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function ProductsList() {
   const { allProducts } = useProductsContext();
@@ -9,13 +11,23 @@ function ProductsList() {
       {allProducts.map(
         ({ id, productName, imageUrl, description, unitPrice }) => {
           return (
-            <div className="card" id={id}>
-              <div className="img-container">
-                <img src={imageUrl} alt={productName} />
-              </div>
-              <h4>{productName}</h4>
-              <p>{description.slice(0, 150)}</p>
-              <h4>$ {unitPrice}</h4>
+            <div className="card" key={id}>
+              <Link to={`/products/${id}`}>
+                <div className="img-container">
+                  <img src={imageUrl} alt={productName} />
+                </div>
+                <h4>{productName}</h4>
+                <p>{description.slice(0, 150)}</p>
+                <h4>{formatPrice(unitPrice)}</h4>
+              </Link>
+
+              <button
+                onClick={() => {
+                  console.log(id);
+                }}
+              >
+                Add to Cart
+              </button>
             </div>
           );
         }
@@ -25,8 +37,11 @@ function ProductsList() {
 }
 
 const Wrapper = styled.div`
+  * {
+    padding: 10px;
+  }
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   padding: 10px 30px;
   .card {
@@ -35,11 +50,14 @@ const Wrapper = styled.div`
     justify-content: space-between;
   }
   .img-container {
-    height: 300px;
+    display: flex;
+    height: 150px;
     overflow: hidden;
   }
   img {
-    object-fit: contain;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 `;
 export default ProductsList;

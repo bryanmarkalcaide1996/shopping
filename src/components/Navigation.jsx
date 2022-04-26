@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useProductsContext } from "../context/products_context";
 
 function Navigation() {
+  const { clearSingleProduct } = useProductsContext();
   return (
     <Wrapper>
       <Link to="/">
@@ -10,7 +12,9 @@ function Navigation() {
       </Link>
       <ul>
         <li>
-          <Link to="/products">Products</Link>
+          <Link to="/products" onClick={clearSingleProduct}>
+            Products
+          </Link>
         </li>
         <li>
           <Link to="/cart">Cart</Link>
