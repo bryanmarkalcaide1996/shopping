@@ -7,7 +7,8 @@ import { faTrash, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { formatPrice } from "../utils/helper";
 
 function Cart() {
-  const { cart, setQty, totalAmount, clearCart, removeItem } = useCartContext();
+  const { cart, setQty, totalAmount, totalQty, clearCart, removeItem } =
+    useCartContext();
 
   if (!cart.length) {
     return (
@@ -79,6 +80,9 @@ function Cart() {
           <div className="cta">
             <h5>
               TOTAL AMOUNT: <br /> {formatPrice(totalAmount)}
+            </h5>
+            <h5>
+              TOTAL ITEMS: <br /> {totalQty}
             </h5>
             <button>Checkout</button>
           </div>

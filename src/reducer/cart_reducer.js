@@ -40,11 +40,24 @@ function cart_reducer(state, { type, payload }) {
       return { ...state, cart: modCart };
 
     case TOTAL_AMOUNT:
-      const finalAmount = state.cart.reduce((total, { unitPrice, qty }) => {
-        const subtotal = unitPrice * qty;
-        return (total += subtotal);
-      }, 0);
-      return { ...state, totalAmount: finalAmount };
+      const finalAmount = state.cart.reduce(
+        (total, { unitPrice, qty }) => {
+          const subtotal = unitPrice * qty;
+
+          return {
+            ...total,
+            amount: (total.amount += subtotal),
+            quantity: (total.quantity += qty),
+          };
+        },
+        { amount: 0, quantity: 0 }
+      );
+
+      return {
+        ...state,
+        totalAmount: finalAmount.amount,
+        totalQty: finalAmount.quantity,
+      };
     case CLEAR_CART:
       return { ...state, cart: [] };
 

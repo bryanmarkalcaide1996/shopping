@@ -21,6 +21,7 @@ const CartContext = createContext();
 const initialState = {
   cart: getLocaleStorage(),
   totalAmount: 0,
+  totalQty: 0,
 };
 
 const CartProvider = ({ children }) => {
