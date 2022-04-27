@@ -1,6 +1,7 @@
 import {
   ADD_TO_CART,
   SET_QUANTITY,
+  REMOVE_ITEM,
   TOTAL_AMOUNT,
   CLEAR_CART,
 } from "../utils/action_type";
@@ -34,9 +35,16 @@ function cart_reducer(state, { type, payload }) {
 
       return { ...state, cart: tempCart };
 
-    case TOTAL_AMOUNT:
-      return { ...state };
+    case REMOVE_ITEM:
+      const modCart = state.cart.filter(({ id }) => id !== payload.id);
+      return { ...state, cart: modCart };
 
+    case TOTAL_AMOUNT:
+      const finalAmount = state.cart.reduce((total, { unitPrice, qty }) => {
+        const subtotal = unitPrice * qty;
+        return (total += subtotal);
+      }, 0);
+      return { ...state, totalAmount: finalAmount };
     case CLEAR_CART:
       return { ...state, cart: [] };
 

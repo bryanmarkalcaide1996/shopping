@@ -5,6 +5,7 @@ import {
   SET_QUANTITY,
   TOTAL_AMOUNT,
   CLEAR_CART,
+  REMOVE_ITEM,
 } from "../utils/action_type";
 
 const getLocaleStorage = () => {
@@ -36,6 +37,10 @@ const CartProvider = ({ children }) => {
     dispatch({ type: SET_QUANTITY, payload: { name, id } });
   }
 
+  function removeItem(id) {
+    dispatch({ type: REMOVE_ITEM, payload: { id } });
+  }
+
   function clearCart() {
     dispatch({ type: CLEAR_CART });
   }
@@ -46,7 +51,9 @@ const CartProvider = ({ children }) => {
   }, [state.cart]);
 
   return (
-    <CartContext.Provider value={{ ...state, addToCart, setQty, clearCart }}>
+    <CartContext.Provider
+      value={{ ...state, addToCart, setQty, clearCart, removeItem }}
+    >
       {children}
     </CartContext.Provider>
   );
