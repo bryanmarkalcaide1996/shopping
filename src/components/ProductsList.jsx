@@ -1,16 +1,17 @@
 import React from "react";
-import { formatPrice } from "../utils/helper.js";
 import styled from "styled-components";
+import { formatPrice } from "../utils/helper.js";
 import { Link } from "react-router-dom";
-import { useProductsContext } from "../context/products_context";
 import { useCartContext } from "../context/cart_context.js";
+import { useFilterContext } from "../context/filter_context.js";
 
 function ProductsList() {
-  const { allProducts } = useProductsContext();
   const { addToCart } = useCartContext();
+  const { filteredList: productsList } = useFilterContext();
+
   return (
     <Wrapper>
-      {allProducts.map(
+      {productsList.map(
         ({ id, productName, imageUrl, description, unitPrice }) => {
           return (
             <div className="card" key={id}>

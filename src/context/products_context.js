@@ -1,14 +1,7 @@
-import React, {
-  useContext,
-  createContext,
-  useReducer,
-  useEffect,
-  useState,
-} from "react";
+import React, { useContext, createContext, useReducer, useState } from "react";
 import reducer from "../reducer/products_reducer";
 import data from "../json/items.json";
 import {
-  LOAD_AND_FETCH,
   LOAD_AND_FETCH_SINGLE_PRODUCT,
   CLEAR_SINGLE_PRODUCT,
 } from "../utils/action_type";
@@ -30,11 +23,6 @@ const ProductsProvider = ({ children }) => {
       setIsLoading(false);
     }, 500);
   }
-
-  // fetch data from json file
-  useEffect(() => {
-    dispatch({ type: LOAD_AND_FETCH, payload: data });
-  }, []);
 
   // fetch singleProduct from json file
   function fetchSingleProduct(id) {
