@@ -5,7 +5,6 @@ import { getUniqueValues } from "../utils/helper";
 
 function Filter() {
   const { allItems, updateFilter } = useFilterContext();
-
   const categories = getUniqueValues(allItems);
   return (
     <Wrapper>
@@ -30,6 +29,10 @@ function Filter() {
 const Wrapper = styled.aside`
   display: flex;
   flex-direction: column;
+  p {
+    cursor: pointer;
+    margin: 5px;
+  }
 `;
 
 export default Filter;
