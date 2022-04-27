@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useCartContext } from "../context/cart_context";
 import { formatPrice } from "../utils/helper";
 
 function Product({ id, productName, imageUrl, description, unitPrice }) {
+  const { addToCart } = useCartContext();
   return (
     <Wrapper>
       <div className="image-container">
@@ -16,7 +18,7 @@ function Product({ id, productName, imageUrl, description, unitPrice }) {
           <h2>{formatPrice(unitPrice)}</h2>
           <button
             onClick={() => {
-              console.log(id);
+              addToCart({ id, productName, imageUrl, description, unitPrice });
             }}
           >
             Add to Cart
