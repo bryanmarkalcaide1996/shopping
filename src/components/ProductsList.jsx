@@ -18,12 +18,12 @@ function ProductsList() {
         ({ id, productName, imageUrl, description, unitPrice }) => {
           return (
             <div className="card" key={id}>
-              <Link to={`/products/${id}`}>
+              <Link to={`/products/${id}`} className="link">
                 <div className="img-container">
                   <img src={imageUrl} alt={productName} />
                 </div>
                 <h4>{productName}</h4>
-                <p>{description.slice(0, 150)}</p>
+                <p>{description.slice(0, 100)}</p>
                 <h4>{formatPrice(unitPrice)}</h4>
               </Link>
               <button
@@ -55,10 +55,10 @@ function ProductsList() {
 const Wrapper = styled.div`
   position: relative;
   * {
-    padding: 10px;
+    padding: 5px;
   }
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
   padding: 10px 30px;
   .card {
@@ -66,7 +66,12 @@ const Wrapper = styled.div`
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    .link {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
   }
   .img-container {
     display: flex;

@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useCartContext } from "../context/cart_context";
 import { formatPrice } from "../utils/helper";
+import CartModal from "./modals/CartModal";
 
 function Product({ id, productName, imageUrl, description, unitPrice }) {
   const { addToCart } = useCartContext();
+  const [showModal, setModal] = useState(false);
+  const navigate = useNavigate();
   return (
     <Wrapper>
+      {showModal && <CartModal />}
       <div className="image-container">
         <img src={imageUrl} alt={productName} />
       </div>
@@ -20,6 +25,11 @@ function Product({ id, productName, imageUrl, description, unitPrice }) {
             className="btn"
             onClick={() => {
               addToCart({ id, productName, imageUrl, description, unitPrice });
+              setModal(true);
+              setTimeout(() => {
+                setModal(false);
+                navigate("/products");
+              }, 1000);
             }}
           >
             Add to Cart
