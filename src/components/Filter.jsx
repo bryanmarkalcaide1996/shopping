@@ -16,8 +16,9 @@ function Filter() {
           <div key={idx}>
             <p
               onClick={(e) => {
-                const { innerText: name } = e.target;
-                updateFilter(name);
+                const { innerText: value } = e.target;
+                const name = "category";
+                updateFilter(name, value);
               }}
             >
               {item}

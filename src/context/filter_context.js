@@ -14,7 +14,7 @@ const initialState = {
   filteredList: [],
   filter: {
     category: "All",
-    price: "Lowest",
+    price: "lowest",
     search: "",
   },
 };
@@ -28,10 +28,11 @@ const FilterProvider = ({ children }) => {
 
   useEffect(() => {
     dispatch({ type: UPDATE_FILTERED_LIST, payload: data.slice() });
+    dispatch({ type: SORT_VALUE });
   }, [state.filter]);
 
-  function updateFilter(name) {
-    dispatch({ type: UPDATE_FILTER, payload: { name } });
+  function updateFilter(name, value) {
+    dispatch({ type: UPDATE_FILTER, payload: { name, value } });
   }
 
   return (

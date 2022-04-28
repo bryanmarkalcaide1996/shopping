@@ -2,13 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPesoSign } from "@fortawesome/free-solid-svg-icons";
+import { useFilterContext } from "../context/filter_context";
 
-function Sort(props) {
+function Sort() {
+  const { updateFilter, sortValue } = useFilterContext();
   return (
     <form>
       <Wrapper>
         <FontAwesomeIcon icon={faPesoSign} />
-        <select name="sortValue" id="">
+        <select
+          name="price"
+          id="sort"
+          onChange={(e) => {
+            const { name, value } = e.target;
+            updateFilter(name, value);
+          }}
+        >
           <option value="lowest">lowest to highest</option>
           <option value="highest">highest to lowest</option>
         </select>

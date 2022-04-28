@@ -11,8 +11,14 @@ function filter_reducer(state, { type, payload }) {
       return { ...state, allItems: payload };
 
     case UPDATE_FILTER:
-      const { name } = payload;
-      return { ...state, filter: { ...state.filter, category: name } };
+      const { name, value } = payload;
+      if (name === "category") {
+        return { ...state, filter: { ...state.filter, category: value } };
+      }
+      if (name === "price") {
+        return { ...state, filter: { ...state.filter, price: value } };
+      }
+      break;
 
     case UPDATE_FILTERED_LIST:
       const categoryName = state.filter.category;
@@ -29,7 +35,19 @@ function filter_reducer(state, { type, payload }) {
       }
 
     case SORT_VALUE:
-      return { ...state };
+      const filterSort = state.filter.price;
+      if (filterSort !== "lowest") {
+        const sortedList = state.filteredList.sort(function (b, a) {
+          return a.unitPrice - b.unitPrice;
+        });
+        return { ...state, filteredList: sortedList };
+      }
+      return {
+        ...state,
+        filteredList: state.filteredList.sort(function (a, b) {
+          return a.unitPrice - b.unitPrice;
+        }),
+      };
 
     default:
       break;
