@@ -14,6 +14,8 @@ const initialState = {
   filteredList: [],
   filter: {
     category: "All",
+    price: "Lowest",
+    search: "",
   },
 };
 

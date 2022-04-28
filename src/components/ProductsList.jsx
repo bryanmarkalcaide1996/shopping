@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { formatPrice } from "../utils/helper.js";
 import { Link } from "react-router-dom";
 import { useCartContext } from "../context/cart_context.js";
 import { useFilterContext } from "../context/filter_context.js";
+import CartModal from "./modals/CartModal.jsx";
 
 function ProductsList() {
   const { addToCart } = useCartContext();
   const { filteredList: productsList } = useFilterContext();
+  const [showModal, setModal] = useState(false);
 
   return (
     <Wrapper>
+      {showModal && <CartModal />}
       {productsList.map(
         ({ id, productName, imageUrl, description, unitPrice }) => {
           return (
@@ -23,8 +26,8 @@ function ProductsList() {
                 <p>{description.slice(0, 150)}</p>
                 <h4>{formatPrice(unitPrice)}</h4>
               </Link>
-
               <button
+                className="btn"
                 onClick={() => {
                   addToCart({
                     id,
@@ -33,6 +36,10 @@ function ProductsList() {
                     description,
                     unitPrice,
                   });
+                  setModal(true);
+                  setTimeout(() => {
+                    setModal(false);
+                  }, 1000);
                 }}
               >
                 Add to Cart
@@ -46,6 +53,7 @@ function ProductsList() {
 }
 
 const Wrapper = styled.div`
+  position: relative;
   * {
     padding: 10px;
   }
@@ -54,6 +62,8 @@ const Wrapper = styled.div`
   gap: 20px;
   padding: 10px 30px;
   .card {
+    background: rgba(217, 206, 63, 0.7);
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -62,6 +72,7 @@ const Wrapper = styled.div`
     display: flex;
     height: 150px;
     overflow: hidden;
+    padding: 0;
   }
   img {
     width: 100%;

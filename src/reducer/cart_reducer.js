@@ -14,6 +14,7 @@ function cart_reducer(state, { type, payload }) {
       } else {
         return { ...state, cart: [...state.cart, payload] };
       }
+
     case SET_QUANTITY:
       const tempCart = state.cart.map((item) => {
         if (item.id === payload.id) {

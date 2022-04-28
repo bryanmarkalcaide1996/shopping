@@ -20,6 +20,7 @@ const getLocaleStorage = () => {
 const CartContext = createContext();
 const initialState = {
   cart: getLocaleStorage(),
+  showModal: false,
   totalAmount: 0,
   totalQty: 0,
 };

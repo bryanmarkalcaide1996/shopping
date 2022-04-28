@@ -28,10 +28,14 @@ export default Navigation;
 
 const Wrapper = styled.nav`
   align-items: center;
-  background: red;
+  background: #630606;
+  color: white;
   display: flex;
   justify-content: space-between;
   padding: 10px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
   ul {
     display: flex;
   }

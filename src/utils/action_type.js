@@ -4,6 +4,7 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const SET_QUANTITY = "SET_QUANTITY";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const CLEAR_CART = "CLEAR_CART";
+export const SHOW_MODAL = "SHOW_MODAL";
 export const TOTAL_AMOUNT = "TOTAL_AMOUNT";
 export const LOAD_PRODUCTS = "LOAD_PRODUCTS";
 export const UPDATE_FILTER = "UPDATE_FILTER";

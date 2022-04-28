@@ -17,6 +17,7 @@ function Product({ id, productName, imageUrl, description, unitPrice }) {
           <p>{description}</p>
           <h2>{formatPrice(unitPrice)}</h2>
           <button
+            className="btn"
             onClick={() => {
               addToCart({ id, productName, imageUrl, description, unitPrice });
             }}

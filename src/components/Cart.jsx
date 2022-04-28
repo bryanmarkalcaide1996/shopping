@@ -12,10 +12,10 @@ function Cart() {
 
   if (!cart.length) {
     return (
-      <div>
+      <div className="empty-cart">
         <h1>Cart is currently empty</h1>
-        <Link to="/products">
-          <button>Fill cart</button>
+        <Link to="/products" style={{ marginTop: "30px" }}>
+          <button className="btn">Fill cart</button>
         </Link>
       </div>
     );
@@ -73,7 +73,7 @@ function Cart() {
           })
           .reverse()}
         <div className="cta-container">
-          <button onClick={clearCart} className="clear-cart">
+          <button onClick={clearCart} className="clear-cart btn">
             Clear Cart
           </button>
 
@@ -131,6 +131,11 @@ const Wrapper = styled.div`
   .cta-container {
     * {
       padding: 10px;
+    }
+
+    .clear-cart {
+      background: rgba(217, 206, 63, 0.5);
+      color: black;
     }
     align-items: center;
     display: flex;
