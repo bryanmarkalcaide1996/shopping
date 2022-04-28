@@ -4,7 +4,7 @@ import styled from "styled-components";
 function PurchaseModal(props) {
   return (
     <Wrapper>
-      <h1>Thank you for you Purchase!</h1>
+      <h1>Thank you for your Purchase!</h1>
     </Wrapper>
   );
 }
