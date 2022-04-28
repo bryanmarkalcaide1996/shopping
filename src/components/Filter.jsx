@@ -53,6 +53,7 @@ const Wrapper = styled.aside`
   .active {
     background: rgba(0, 0, 0, 0.8);
     border-radius: 3px;
+    color: white;
   }
 `;
 
