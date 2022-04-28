@@ -5,16 +5,25 @@ import { useCartContext } from "../context/cart_context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { formatPrice } from "../utils/helper";
+import PurchaseModal from "./modals/PurchaseModal";
 
 function Cart() {
-  const { cart, setQty, totalAmount, totalQty, clearCart, removeItem } =
-    useCartContext();
+  const {
+    cart,
+    setQty,
+    totalAmount,
+    totalQty,
+    clearCart,
+    removeItem,
+    showModal,
+    setModal,
+  } = useCartContext();
 
   if (!cart.length) {
     return (
       <div className="empty-cart">
         <h1>Cart is currently empty</h1>
-        <Link to="/products" style={{ marginTop: "30px" }}>
+        <Link to="/" style={{ marginTop: "30px" }}>
           <button className="btn">Fill cart</button>
         </Link>
       </div>
@@ -23,6 +32,7 @@ function Cart() {
 
   return (
     <Wrapper>
+      {showModal && <PurchaseModal />}
       <div className="items-list-container">
         {cart
           .map(({ id, productName, imageUrl, unitPrice, qty }) => {
@@ -84,7 +94,17 @@ function Cart() {
             <h5>
               TOTAL ITEMS: <br /> {totalQty}
             </h5>
-            <button>Checkout</button>
+            <button
+              className="btn"
+              onClick={() => {
+                setModal(true);
+                setTimeout(() => {
+                  setModal(false);
+                }, 1000);
+              }}
+            >
+              Checkout
+            </button>
           </div>
         </div>
       </div>

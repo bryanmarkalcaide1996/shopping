@@ -28,7 +28,7 @@ function Product({ id, productName, imageUrl, description, unitPrice }) {
               setModal(true);
               setTimeout(() => {
                 setModal(false);
-                navigate("/products");
+                navigate("/");
               }, 1000);
             }}
           >

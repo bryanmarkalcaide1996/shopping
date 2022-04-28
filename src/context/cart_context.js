@@ -1,4 +1,10 @@
-import React, { useContext, createContext, useReducer, useEffect } from "react";
+import React, {
+  useContext,
+  createContext,
+  useReducer,
+  useEffect,
+  useState,
+} from "react";
 import reducer from "../reducer/cart_reducer";
 import {
   ADD_TO_CART,
@@ -6,6 +12,7 @@ import {
   TOTAL_AMOUNT,
   CLEAR_CART,
   REMOVE_ITEM,
+  SHOW_MODAL,
 } from "../utils/action_type";
 
 const getLocaleStorage = () => {
@@ -27,6 +34,19 @@ const initialState = {
 
 const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [showModal, setModal] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(state.cart));
+    dispatch({ type: TOTAL_AMOUNT });
+  }, [state.cart]);
+
+  useEffect(() => {
+    dispatch({ type: SHOW_MODAL, payload: showModal });
+    setTimeout(() => {
+      dispatch({ type: CLEAR_CART });
+    }, 1500);
+  }, [showModal]);
 
   function addToCart({ id, productName, imageUrl, description, unitPrice }) {
     dispatch({
@@ -47,14 +67,9 @@ const CartProvider = ({ children }) => {
     dispatch({ type: CLEAR_CART });
   }
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(state.cart));
-    dispatch({ type: TOTAL_AMOUNT });
-  }, [state.cart]);
-
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, setQty, clearCart, removeItem }}
+      value={{ ...state, addToCart, setQty, clearCart, removeItem, setModal }}
     >
       {children}
     </CartContext.Provider>

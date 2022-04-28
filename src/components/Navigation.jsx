@@ -14,7 +14,7 @@ function Navigation() {
       </Link>
       <ul>
         <li>
-          <Link to="/products" onClick={clearSingleProduct}>
+          <Link to="/" onClick={clearSingleProduct}>
             Products
           </Link>
         </li>

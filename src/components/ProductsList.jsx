@@ -15,7 +15,7 @@ function ProductsList() {
     <Wrapper>
       {showModal && <CartModal />}
       {productsList.map(
-        ({ id, productName, imageUrl, description, unitPrice }) => {
+        ({ id, productName, imageUrl, description, unitPrice, category }) => {
           return (
             <div className="card" key={id}>
               <Link to={`/products/${id}`} className="link">
@@ -24,6 +24,7 @@ function ProductsList() {
                 </div>
                 <h4>{productName}</h4>
                 <p>{description.slice(0, 100)}</p>
+                <h5>{category}</h5>
                 <h4>{formatPrice(unitPrice)}</h4>
               </Link>
               <button
@@ -58,7 +59,7 @@ const Wrapper = styled.div`
     padding: 5px;
   }
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 20px;
   padding: 10px 30px;
   .card {

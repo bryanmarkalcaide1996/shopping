@@ -4,6 +4,7 @@ import {
   REMOVE_ITEM,
   TOTAL_AMOUNT,
   CLEAR_CART,
+  SHOW_MODAL,
 } from "../utils/action_type";
 
 function cart_reducer(state, { type, payload }) {
@@ -59,6 +60,9 @@ function cart_reducer(state, { type, payload }) {
         totalAmount: finalAmount.amount,
         totalQty: finalAmount.quantity,
       };
+    case SHOW_MODAL:
+      return { ...state, showModal: payload };
+
     case CLEAR_CART:
       return { ...state, cart: [] };
 
