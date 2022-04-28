@@ -5,7 +5,7 @@ import { faPesoSign } from "@fortawesome/free-solid-svg-icons";
 import { useFilterContext } from "../context/filter_context";
 
 function Sort() {
-  const { updateFilter, sortValue } = useFilterContext();
+  const { updateFilter } = useFilterContext();
   return (
     <form>
       <Wrapper>

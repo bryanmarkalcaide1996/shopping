@@ -5,6 +5,7 @@ import {
   UPDATE_FILTER,
   UPDATE_FILTERED_LIST,
   SORT_VALUE,
+  UPDATE_SEARCH,
 } from "../utils/action_type";
 import data from "../json/items.json";
 
@@ -29,6 +30,7 @@ const FilterProvider = ({ children }) => {
   useEffect(() => {
     dispatch({ type: UPDATE_FILTERED_LIST, payload: data.slice() });
     dispatch({ type: SORT_VALUE });
+    dispatch({ type: UPDATE_SEARCH });
   }, [state.filter]);
 
   function updateFilter(name, value) {

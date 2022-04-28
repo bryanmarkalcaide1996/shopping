@@ -3,6 +3,7 @@ import {
   UPDATE_FILTER,
   UPDATE_FILTERED_LIST,
   SORT_VALUE,
+  UPDATE_SEARCH,
 } from "../utils/action_type";
 
 function filter_reducer(state, { type, payload }) {
@@ -17,6 +18,9 @@ function filter_reducer(state, { type, payload }) {
       }
       if (name === "price") {
         return { ...state, filter: { ...state.filter, price: value } };
+      }
+      if (name === "search") {
+        return { ...state, filter: { ...state.filter, search: value } };
       }
       break;
 
@@ -42,10 +46,19 @@ function filter_reducer(state, { type, payload }) {
         });
         return { ...state, filteredList: sortedList };
       }
+
       return {
         ...state,
         filteredList: state.filteredList.sort(function (a, b) {
           return a.unitPrice - b.unitPrice;
+        }),
+      };
+    case UPDATE_SEARCH:
+      const searchName = state.filter.search;
+      return {
+        ...state,
+        filteredList: state.filteredList.filter(({ productName }) => {
+          return productName.toLowerCase().startsWith(searchName);
         }),
       };
 
