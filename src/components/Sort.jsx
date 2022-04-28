@@ -18,8 +18,8 @@ function Sort() {
             updateFilter(name, value);
           }}
         >
-          <option value="lowest">lowest to highest</option>
-          <option value="highest">highest to lowest</option>
+          <option value="lowest">Lowest to Highest</option>
+          <option value="highest">Highest to Lowest</option>
         </select>
       </Wrapper>
     </form>

@@ -21,11 +21,11 @@ function Filter() {
               onClick={(e) => {
                 const { innerText: value, id } = e.target;
                 const name = "category";
-                updateFilter(name, value);
+                updateFilter(name, value.toLowerCase());
                 setActive(categories[id]);
               }}
             >
-              {item}
+              {item.toUpperCase()}
             </p>
           </div>
         );
@@ -51,7 +51,7 @@ const Wrapper = styled.aside`
     color: white;
   }
   .active {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 3px;
     color: white;
   }

@@ -27,7 +27,7 @@ function filter_reducer(state, { type, payload }) {
     case UPDATE_FILTERED_LIST:
       const categoryName = state.filter.category;
 
-      if (categoryName === "All") {
+      if (categoryName.toLowerCase() === "all") {
         return { ...state, filteredList: state.allItems };
       } else {
         return {

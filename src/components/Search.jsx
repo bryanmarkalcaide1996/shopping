@@ -28,13 +28,16 @@ function Search() {
 }
 
 const Wrapper = styled.div`
+  border-radius: 5px;
   display: flex;
   margin: 5px;
+  overflow: hidden;
   * {
-    padding: 3px;
+    padding: 5px;
   }
   input {
     width: 100%;
+    background: rgba(0, 0, 0, 0.2);
   }
 `;
 export default Search;
