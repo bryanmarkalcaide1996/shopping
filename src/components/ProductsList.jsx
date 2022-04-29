@@ -49,7 +49,7 @@ function ProductsList() {
           );
         }
       )}
-    </>
+    </Wrapper>
   );
 }
 
@@ -59,9 +59,10 @@ const Wrapper = styled.div`
     padding: 5px;
   }
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 10px 30px;
+  width: 100%;
   .card {
     background: rgba(217, 206, 63, 0.7);
     border-radius: 5px;
