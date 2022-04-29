@@ -1,10 +1,43 @@
 * {
   box-sizing: border-box;
+  border: none;
   color: inherit;
   list-style: none;
   padding: 0;
   margin: 0;
   text-decoration: none;
+  transition: all 0.1s;
+}
+.btn {
+  background: #e83a14;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 10px !important;
+}
+.btn:active {
+  transform: scale(1.01);
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+.empty-cart {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+}
+.cart-modal {
+  background: rgba(232, 58, 20);
+  border: 2px solid black;
+  border-radius: 5px;
+  color: white;
+  padding: 10px !important;
+  position: fixed;
+  top: 50px;
+  right: 40px;
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

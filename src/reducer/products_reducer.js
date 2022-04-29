@@ -1,16 +1,9 @@
 import {
-  LOAD_AND_FETCH,
   LOAD_AND_FETCH_SINGLE_PRODUCT,
   CLEAR_SINGLE_PRODUCT,
 } from "../utils/action_type";
 function products_reducer(state, { type, payload }) {
   switch (type) {
-    case LOAD_AND_FETCH:
-      return {
-        ...state,
-        isLoading: false,
-        allProducts: payload,
-      };
     case LOAD_AND_FETCH_SINGLE_PRODUCT:
       return {
         ...state,

@@ -1,71 +1,84 @@
 import React, { useState } from "react";
-import { formatPrice } from "../utils/helper.js";
 import styled from "styled-components";
+import { formatPrice } from "../utils/helper.js";
 import { Link } from "react-router-dom";
-import { useProductsContext } from "../context/products_context";
 import { useCartContext } from "../context/cart_context.js";
+import { useFilterContext } from "../context/filter_context.js";
+import CartModal from "./modals/CartModal.jsx";
 
 function ProductsList() {
-  const [filter, setFilter] = useState(true);
-  const { allProducts } = useProductsContext();
   const { addToCart } = useCartContext();
-  return (
-    <>
-      {filter ? null : (
-        <Wrapper>
-          {allProducts.map(
-            ({ id, productName, imageUrl, description, unitPrice }) => {
-              return (
-                <div className="card" key={id}>
-                  <Link to={`/products/${id}`}>
-                    <div className="img-container">
-                      <img src={imageUrl} alt={productName} />
-                    </div>
-                    <h4>{productName}</h4>
-                    <p>{description.slice(0, 150)}</p>
-                    <h4>{formatPrice(unitPrice)}</h4>
-                  </Link>
+  const { filteredList: productsList } = useFilterContext();
+  const [showModal, setModal] = useState(false);
 
-                  <button
-                    onClick={() => {
-                      addToCart({
-                        id,
-                        productName,
-                        imageUrl,
-                        description,
-                        unitPrice,
-                      });
-                    }}
-                  >
-                    Add to Cart
-                  </button>
+  return (
+    <Wrapper>
+      {showModal && <CartModal />}
+      {productsList.map(
+        ({ id, productName, imageUrl, description, unitPrice, category }) => {
+          return (
+            <div className="card" key={id}>
+              <Link to={`/products/${id}`} className="link">
+                <div className="img-container">
+                  <img src={imageUrl} alt={productName} />
                 </div>
-              );
-            }
-          )}
-        </Wrapper>
+                <h4>{productName}</h4>
+                <p>{description.slice(0, 100)}</p>
+                <h5>{category}</h5>
+                <h4>{formatPrice(unitPrice)}</h4>
+              </Link>
+              <button
+                className="btn"
+                onClick={() => {
+                  addToCart({
+                    id,
+                    productName,
+                    imageUrl,
+                    description,
+                    unitPrice,
+                  });
+                  setModal(true);
+                  setTimeout(() => {
+                    setModal(false);
+                  }, 1000);
+                }}
+              >
+                Add to Cart
+              </button>
+            </div>
+          );
+        }
       )}
     </>
   );
 }
 
 const Wrapper = styled.div`
+  position: relative;
   * {
-    padding: 10px;
+    padding: 5px;
   }
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 20px;
   padding: 10px 30px;
   .card {
+    background: rgba(217, 206, 63, 0.7);
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    .link {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
   }
   .img-container {
     display: flex;
     height: 150px;
     overflow: hidden;
+    padding: 0;
   }
   img {
     width: 100%;
