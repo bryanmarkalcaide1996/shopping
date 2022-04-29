@@ -6,15 +6,7 @@ import {
   TOTAL_AMOUNT,
   CLEAR_CART,
 } from "../utils/action_type";
-
-const getLocaleStorage = () => {
-  let cartData = JSON.parse(localStorage.getItem("cart"));
-  if (cartData) {
-    return cartData;
-  } else {
-    return [];
-  }
-};
+import { getLocaleStorage } from "../utils/getLocaleStorage";
 
 const CartContext = createContext();
 const initialState = {

@@ -1,9 +1,8 @@
-export function getLocaleStorage() {
-  const data = localStorage.getItem("myCart");
-
-  if (data === "undefined") {
-    localStorage.setItem("myCart", JSON.stringify([]));
+export const getLocaleStorage = () => {
+  let cartData = JSON.parse(localStorage.getItem("cart"));
+  if (cartData) {
+    return cartData;
   } else {
-    return JSON.parse(data);
+    return [];
   }
-}
+};
